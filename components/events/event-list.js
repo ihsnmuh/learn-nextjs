@@ -1,5 +1,5 @@
-import EventItem from './EventItem';
-import Styles from './EventList.module.css';
+import EventItem from './event-item';
+import Styles from './event-list.module.css';
 
 export default function EventList(props) {
   const { items } = props;

@@ -19,8 +19,8 @@ export default function Home(props) {
 export async function getStaticProps() {
   // Akan berjalan ketika dilakukannya npm build
   console.log('Re Generating..');
-  const filtePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
-  const jsonData = await fs.readFile(filtePath);
+  const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
+  const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
 
   if (!data) {

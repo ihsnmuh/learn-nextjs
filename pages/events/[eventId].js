@@ -15,7 +15,7 @@ export default function EventDetailPage() {
     return (
       <>
         <ErrorAlert>
-          <p>No Event Found</p>;
+          <p>No Event Found</p>
         </ErrorAlert>
       </>
     );

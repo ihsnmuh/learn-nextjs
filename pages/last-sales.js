@@ -1,8 +1,30 @@
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
-export default function LastSalesPage() {
-  const [sales, setSales] = useState([]);
+export default function LastSalesPage(props) {
+  const [sales, setSales] = useState(props.sales);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
+  // const { data, error } = useSWR(
+  //   'https://nextjs-learn-8ad33-default-rtdb.firebaseio.com/sales.json'
+  // );
+
+  // useEffect(() => {
+  //   console.log(data);
+  //   if (data) {
+  //     const transformSales = [];
+
+  //     for (const key in data) {
+  //       transformSales.push({
+  //         id: key,
+  //         userName: data[key].userName,
+  //         volume: data[key].volume,
+  //       });
+  //     }
+  //     setSales(transformSales);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,15 +42,19 @@ export default function LastSalesPage() {
         }
         setSales(transformSales);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
       });
-  }, []);
+  }, [sales]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
+  if (error) {
+    return <p>Failed to load</p>;
   }
 
-  if (!sales) {
-    return <p>No data yet</p>;
+  if (!sales || isLoading) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -40,4 +66,26 @@ export default function LastSalesPage() {
       ))}
     </ul>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetch(
+    'https://nextjs-learn-8ad33-default-rtdb.firebaseio.com/sales.json'
+  );
+  const data = await response.json();
+
+  const transformSales = [];
+
+  for (const key in data) {
+    transformSales.push({
+      id: key,
+      userName: data[key].userName,
+      volume: data[key].volume,
+    });
+  }
+  return {
+    props: {
+      sales: transformSales,
+    },
+  };
 }

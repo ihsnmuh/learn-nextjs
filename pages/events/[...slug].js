@@ -43,8 +43,6 @@ export default function FilteredEventPage() {
     month: filteredMonth,
   });
 
-  console.log(filteredEvents);
-
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>

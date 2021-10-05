@@ -41,9 +41,6 @@ export default function FilteredEventPage() {
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
 
-  console.log(numYear);
-  console.log(numMonth);
-
   if (
     isNaN(numYear) ||
     isNaN(numMonth) ||

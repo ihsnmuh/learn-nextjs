@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const [loadDataFeedback, setLoadDataFeedback] = useState([]);
   const emailInputRef = useRef();
   const feedbackInputRef = useRef();
 
@@ -24,8 +25,17 @@ export default function Home() {
       .then((data) => console.log(data));
   }
 
+  function loadFeedbackHandler() {
+    fetch('/api/feedback')
+      .then((resp) => resp.json())
+      .then((data) => {
+        const { feedback } = data;
+        setLoadDataFeedback(feedback);
+      });
+  }
+
   return (
-    <div className={styles.container}>
+    <>
       <h1>The Page</h1>
       <form onSubmit={submitFormHandler}>
         <div>
@@ -43,6 +53,17 @@ export default function Home() {
         </div>
         <button>Submit</button>
       </form>
-    </div>
+      <hr />
+      <button onClick={loadFeedbackHandler}>Load Feedback</button>
+      <div>
+        <ul>
+          {loadDataFeedback.map((data) => (
+            <li key={data.id}>
+              {data.feedback} from {data.email}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

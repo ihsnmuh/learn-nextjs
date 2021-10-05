@@ -1,4 +1,4 @@
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
@@ -7,7 +7,7 @@ import ErrorAlert from '../../components/ui/error-alert';
 import { getFilteredEvents } from '../../helpers/api-util';
 import useSWR from 'swr';
 
-export default function FilteredEventPage(props) {
+export default function FilteredEventPage() {
   const [loadedEvents, setLoadedEvents] = useState([]);
   const router = useRouter();
 
@@ -31,20 +31,26 @@ export default function FilteredEventPage(props) {
     }
   }, [data]);
 
-  if (!loadedEvents) {
+  if (!loadedEvents || loadedEvents.length === 0) {
     return <p className='center'>Loading..</p>;
   }
 
-  const filteredYear = +filterData[0];
-  const filteredMonth = +filterData[1];
+  const filteredYear = filterData[0];
+  const filteredMonth = filterData[1];
+
+  const numYear = +filteredYear;
+  const numMonth = +filteredMonth;
+
+  console.log(numYear);
+  console.log(numMonth);
 
   if (
-    isNaN(filteredYear) ||
-    isNaN(filteredMonth) ||
-    filteredYear > 2030 ||
-    filteredYear < 2021 ||
-    filteredMonth < 1 ||
-    filteredMonth > 12 ||
+    isNaN(numYear) ||
+    isNaN(numMonth) ||
+    numYear > 2030 ||
+    numYear < 2021 ||
+    numMonth < 1 ||
+    numMonth > 12 ||
     error
   ) {
     return (
@@ -62,8 +68,8 @@ export default function FilteredEventPage(props) {
   let filteredEvents = loadedEvents.filter((event) => {
     const eventDate = new Date(event.date);
     return (
-      eventDate.getFullYear() === filteredYear &&
-      eventDate.getMonth() === filteredMonth - 1
+      eventDate.getFullYear() === numYear &&
+      eventDate.getMonth() === numMonth - 1
     );
   });
 
@@ -80,7 +86,7 @@ export default function FilteredEventPage(props) {
     );
   }
 
-  const date = new Date(filteredYear, filteredMonth - 1);
+  const date = new Date(numYear, numMonth - 1);
 
   return (
     <>

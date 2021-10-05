@@ -1,7 +1,7 @@
 import EventList from '../../components/events/event-list';
 import { getAllEvents } from '../../helpers/api-util';
 import EventsSearch from '../../components/events/event-search';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 export default function AllEventsPage(props) {
   const router = useRouter();

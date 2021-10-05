@@ -10,7 +10,6 @@ import {
 
 export default function EventDetailPage(props) {
   const event = props.selectedEvent;
-  console.log(event);
 
   if (!event) {
     return (
@@ -42,6 +41,12 @@ export async function getStaticProps(context) {
   const eventId = context.params.eventId;
 
   const event = await getEventById(eventId);
+
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

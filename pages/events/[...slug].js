@@ -1,11 +1,11 @@
+import Head from 'next/dist/shared/lib/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
-import { getFilteredEvents } from '../../helpers/api-util';
-import useSWR from 'swr';
 
 export default function FilteredEventPage() {
   const [loadedEvents, setLoadedEvents] = useState([]);
@@ -52,6 +52,13 @@ export default function FilteredEventPage() {
   ) {
     return (
       <>
+        <Head>
+          <title>{`Filter Events ${numMonth} - ${numYear}`}</title>
+          <meta
+            name='description'
+            content={`All Events for ${numMonth} - ${numYear}`}
+          />
+        </Head>
         <ErrorAlert>
           <p className='center'>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -73,6 +80,13 @@ export default function FilteredEventPage() {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        <Head>
+          <title>{`Filter Events ${numMonth} - ${numYear}`}</title>
+          <meta
+            name='description'
+            content={`All Events for ${numMonth} - ${numYear}`}
+          />
+        </Head>
         <ErrorAlert>
           <p className='center'>No events found for your filter!</p>
         </ErrorAlert>
@@ -87,6 +101,13 @@ export default function FilteredEventPage() {
 
   return (
     <>
+      <Head>
+        <title>{`Filter Events ${numMonth} - ${numYear}`}</title>
+        <meta
+          name='description'
+          content={`All Events for ${numMonth} - ${numYear}`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>

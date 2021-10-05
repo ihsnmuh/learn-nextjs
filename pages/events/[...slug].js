@@ -40,7 +40,7 @@ export default function FilteredEventPage() {
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
 
-  const pageHeadLoad = (
+  let pageHeadLoad = (
     <Head>
       <title>{`Filter Events ${numMonth} - ${numYear}`}</title>
       <meta

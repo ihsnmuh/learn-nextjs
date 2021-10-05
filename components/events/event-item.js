@@ -4,6 +4,7 @@ import ArrowRightIcon from '../icons/arrow-right-icon';
 import DateIcon from '../icons/date-icon';
 import Button from '../ui/button';
 import styles from './event-item.module.css';
+import Image from 'next/image';
 
 export default function EventItem(props) {
   const { title, image, date, location, id } = props;
@@ -19,7 +20,7 @@ export default function EventItem(props) {
 
   return (
     <li className={styles.item}>
-      <img src={'/' + image} alt={title}></img>
+      <Image src={'/' + image} alt={title} height={160} width={250} />
       <div className={styles.content}>
         <div className={styles.summary}>
           <h2>{title}</h2>

@@ -4,7 +4,7 @@ import { buildFeedbackPath, extractFeedback } from '../api/feedback';
 export default function FeedbackPage(props) {
   const [feedbackData, setFeedbackData] = useState([]);
   function handleDetailFeedback(id) {
-    fetch(`/api/${id}`)
+    fetch(`/api/feedback/${id}`)
       .then((resp) => resp.json())
       .then((data) => {
         setFeedbackData(data.feedback);

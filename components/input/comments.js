@@ -10,19 +10,20 @@ function Comments(props) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-    if (showComments) {
-      fetch('/api/comments/' + eventId)
-        .then((response) => response.json())
-        .then((data) => {
-          setComments(data.comments);
-        });
-    }
-  }, [showComments]);
-
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
   }
+
+  useEffect(() => {
+    if (showComments) {
+      fetch('/api/comments/' + eventId)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const { comments } = data;
+          setComments(comments);
+        });
+    }
+  }, [showComments]);
 
   function addCommentHandler(commentData) {
     fetch('/api/comments/' + eventId, {
@@ -32,7 +33,7 @@ function Comments(props) {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
+      .then((resp) => resp.json())
       .then((data) => console.log(data));
   }
 

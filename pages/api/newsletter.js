@@ -1,4 +1,9 @@
-export default function handler(req, res) {
+import { MongoClient } from 'mongodb';
+
+export default async function handler(req, res) {
+  const url =
+    'mongodb+srv://User:xV!NvYPsxbe9BJd@cluster0.yfbud.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
   if (req.method === 'POST') {
     const userEmail = req.body.email;
 
@@ -7,7 +12,11 @@ export default function handler(req, res) {
       return;
     }
 
-    console.log(userEmail);
+    const client = await MongoClient.connect(url);
+    const db = client.db();
+    await db.collection('emails').insertOne({ email: userEmail });
+    client.close();
+
     res.status(201).json({ message: 'Signed up!' });
   }
 }

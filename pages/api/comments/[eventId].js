@@ -1,5 +1,12 @@
-function handler(req, res) {
+import { MongoClient } from 'mongodb';
+
+async function handler(req, res) {
   const { eventId } = req.query;
+
+  const url =
+    'mongodb+srv://User:xV!NvYPsxbe9BJd@cluster0.yfbud.mongodb.net/events?retryWrites=true&w=majority';
+
+  const client = await MongoClient.connect(url);
 
   if (req.method === 'POST') {
     const { email, name, text } = req.body;
@@ -16,12 +23,18 @@ function handler(req, res) {
     }
 
     const newComment = {
-      id: new Date().toISOString(),
       email,
       name,
       text,
+      eventId,
     };
-    console.log(newComment);
+
+    const db = client.db();
+    const result = await db.collection('comments').insertOne(newComment);
+
+    console.log(result);
+    newComment.id = result.insertedId;
+
     res.status(201).json({ message: 'Added comment', comment: newComment });
   }
 

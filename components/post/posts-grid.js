@@ -1,11 +1,12 @@
-import classes from './posts-grid.js';
+import PostItem from './post-item.js';
+import classes from './posts-grid.module.css';
 
 export default function PostGrid(props) {
   const { posts } = props;
   return (
     <ul className={classes.grid}>
       {posts.map((post) => (
-        <PostItem />
+        <PostItem key={post.slug} post={post} />
       ))}
     </ul>
   );

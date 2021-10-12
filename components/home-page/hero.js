@@ -7,7 +7,7 @@ export default function Hore() {
     <section className={classes.hero}>
       <div className={classes.image}>
         <Image
-          src='/images/side/ihsan-image.png'
+          src='/images/site/ihsan-image.png'
           alt='image Muhammad Ihsan'
           width={300}
           height={300}

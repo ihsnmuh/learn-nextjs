@@ -21,8 +21,6 @@ function handler(req, res) {
       message,
     };
 
-    console.log(newMessage);
-
     res
       .status(201)
       .json({ message: 'Successfully adding message!', message: newMessage });

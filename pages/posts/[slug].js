@@ -25,15 +25,16 @@ export function getStaticProps(context) {
     props: {
       post: postData,
     },
+    revalidate: 600,
   };
 }
 
 export function getStaticPaths() {
   const postFileNames = getPostFiles();
-  const slug = postFileNames.map((fileName) => fileName.replace(/\.md$/, ''));
+  const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ''));
 
   return {
-    paths: slug.map((slug) => ({ params: { slug: slug } })),
+    paths: slugs.map((slug) => ({ params: { slug: slug } })),
     fallback: false,
   };
 }

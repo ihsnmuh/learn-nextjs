@@ -15,6 +15,8 @@ async function sendContactData(contactDetails) {
 
   if (!response.ok) {
     throw new Error(data.message || 'Something wrong!');
+  } else {
+    return data;
   }
 }
 
@@ -42,11 +44,12 @@ export default function ContactForm() {
     setRequestStatus('pending');
 
     try {
-      await sendContactData({
+      const data = await sendContactData({
         email: enteredEmail,
         name: enteredName,
         message: enteredMessage,
       });
+      // console.log(data);
       setRequestStatus('success');
       setEnteredMessage('');
       setEnteredEmail('');

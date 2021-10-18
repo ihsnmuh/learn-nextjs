@@ -10,7 +10,7 @@ isFeatured: true
 
 Posting pertama mengenai coding **get data from directory**
 
-```
+```json
 {
   "firstName": "John",
   "lastName": "Smith",

@@ -12,7 +12,7 @@ async function handler(req, res) {
       !message ||
       !message.trim() === ''
     ) {
-      res.status(422).json({ message: 'Invalid Input.' });
+      res.status(422).json({ message: 'Invalid Input!' });
       return;
     }
 

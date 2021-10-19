@@ -1,6 +1,6 @@
+import Head from 'next/head';
 import AllPosts from '../../components/post/all-posts';
 import { getAllPosts } from '../../lib/posts-utils';
-import Head from 'next/head';
 
 export default function AllPostPage(props) {
   const { posts } = props;

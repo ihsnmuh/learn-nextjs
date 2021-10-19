@@ -12,14 +12,14 @@ module.exports = (phase) => {
       },
     };
   }
-};
 
-return {
-  reactStrictMode: true,
-  env: {
-    mongodb_username: 'User',
-    mongodb_password: 'xV!NvYPsxbe9BJd',
-    mongodb_clustername: 'cluster0',
-    mongodb_database: 'mySite',
-  },
+  return {
+    reactStrictMode: true,
+    env: {
+      mongodb_username: 'User',
+      mongodb_password: 'xV!NvYPsxbe9BJd',
+      mongodb_clustername: 'cluster0',
+      mongodb_database: 'mySite',
+    },
+  };
 };

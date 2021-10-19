@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import Head from 'next/head';
 import FeaturePost from '../components/home-page/featured-post';
 import Hero from '../components/home-page/hero';
 import { getFeaturePosts } from '../lib/posts-utils';
-import Head from 'next/head';
 
 export default function HomePage(props) {
   const { posts } = props;

@@ -16,7 +16,6 @@ async function handler(req, res) {
       return;
     }
 
-    //store in database
     const newMessage = {
       email,
       name,

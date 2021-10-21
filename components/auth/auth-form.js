@@ -46,8 +46,9 @@ function AuthForm() {
       });
 
       if (!result.error) {
-        // error
         router.replace('/profile');
+      } else {
+        console.log(result.error);
       }
     } else {
       try {
